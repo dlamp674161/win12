@@ -96,7 +96,7 @@ function toggleOption(optionElement) {
     return 'Set: 12345678';
   }
   if (currentValue.includes('Set: 12345678')) {
-    optionElement.innerText = '[Not Set]'
+    optionElement.innerText = '[Not Set]';
     return 'Not Set';
   }
   return currentValue;
