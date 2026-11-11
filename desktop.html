@@ -512,10 +512,10 @@ toggletheme() 切换主题
       aria-modal="true"
       aria-label="登录"
       tabindex="-1"
-      style="position: relative;"
+      style="position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;"
     >
       <!-- Administrator Login Panel -->
-      <div id="panel-admin" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; width: 100%;">
+      <div id="panel-admin" style="display: flex; flex-direction: column; align-items: center;">
         <div class="user"></div>
         <div class="name">Administrator</div>
 
@@ -560,7 +560,7 @@ toggletheme() 切换主题
       </div>
 
       <!-- Other User Login Panel (MariaDB Backed + Bilingual Banner) -->
-      <div id="panel-other" style="display: none; flex-direction: column; align-items: center; justify-content: center; height: 100%; width: 100%;">
+      <div id="panel-other" style="display: none; flex-direction: column; align-items: center;">
         <!-- Bilingual Hello World Banner -->
         <div style="background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.15); padding: 12px 20px; border-radius: 6px; margin-bottom: 20px; text-align: center; width: 280px;">
           <p style="color: #fff; margin: 0; font-size: 15px; font-weight: 500;">Hello World! / 世界，你好！</p>
@@ -599,7 +599,7 @@ toggletheme() 切换主题
       </div>
 
       <!-- Windows 11 style Bottom-Left Account Switcher Tabs -->
-      <div style="display: flex; flex-direction: column; gap: 8px; position: absolute; bottom: 30px; left: 30px; z-index: 10;">
+      <div style="display: flex; flex-direction: column; gap: 6px; position: absolute; bottom: 30px; left: 30px; z-index: 10;">
         <button type="button" onclick="switchLoginTab('admin')" id="tab-admin" style="background: rgba(255,255,255,0.25); border: none; color: #fff; padding: 8px 16px; border-radius: 4px; cursor: pointer; text-align: left; font-weight: bold; font-size: 13px;">Administrator</button>
         <button type="button" onclick="switchLoginTab('other')" id="tab-other" style="background: rgba(255,255,255,0.08); border: none; color: #ccc; padding: 8px 16px; border-radius: 4px; cursor: pointer; text-align: left; font-size: 13px;">Other user</button>
       </div>
@@ -654,14 +654,6 @@ toggletheme() 切换主题
         >
       </list>
       <a class="power" onclick="$(this).addClass('show')">
-        <!-- <i class="bi bi-translate" onclick="
-				if(localStorage.getItem('lang')&&localStorage.getItem('lang')=='en'){
-					setData('lang','zh_cn');
-				}else{
-					setData('lang','en');
-				}
-				window.location.href='';
-				" win12_title="Toggle language"></i> -->
         <i
           class="bi bi-power"
           onclick="
@@ -682,58 +674,6 @@ toggletheme() 切换主题
         ></i>
       </a>
     </div>
-
-<script>
-function switchLoginTab(type) {
-  const adminPanel = document.getElementById('panel-admin');
-  const otherPanel = document.getElementById('panel-other');
-  const adminTab = document.getElementById('tab-admin');
-  const otherTab = document.getElementById('tab-other');
-
-  if (type === 'admin') {
-    adminPanel.style.display = 'flex';
-    otherPanel.style.display = 'none';
-    adminTab.style.background = 'rgba(255,255,255,0.25)';
-    adminTab.style.color = '#fff';
-    adminTab.style.fontWeight = 'bold';
-    otherTab.style.background = 'rgba(255,255,255,0.08)';
-    otherTab.style.color = '#ccc';
-    otherTab.style.fontWeight = 'normal';
-  } else {
-    adminPanel.style.display = 'none';
-    otherPanel.style.display = 'flex';
-    otherTab.style.background = 'rgba(255,255,255,0.25)';
-    otherTab.style.color = '#fff';
-    otherTab.style.fontWeight = 'bold';
-    adminTab.style.background = 'rgba(255,255,255,0.08)';
-    adminTab.style.color = '#ccc';
-    adminTab.style.fontWeight = 'normal';
-  }
-}
-
-function otherUserLoginSubmit() {
-  const user = document.getElementById('other-username').value;
-  const pass = document.getElementById('other-password').value;
-  
-  fetch('api/auth.php', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username: user, password: pass })
-  })
-  .then(res => res.json())
-  .then(data => {
-    if (data.success) {
-      window.location.href = 'desktop.html';
-    } else {
-      document.getElementById('other-login-error').innerText = data.message || 'Invalid credentials';
-    }
-  })
-  .catch(err => {
-    document.getElementById('other-login-error').innerText = 'Connection error to database backend.';
-  });
-}
-</script>
-
     <div id="voiceBall" class="draggable no-drag" style="top: 80%; left: 80%">
       <div class="rainbow-container-main">
         <div class="rainbow-container">
