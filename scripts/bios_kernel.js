@@ -202,7 +202,7 @@ window.onkeydown = (evt) => {
         foc--;
         updateFocus();
       }
-    } else if (event.keyCode === 13) {
+    } else if (event.keyCode === 13 || event.keyCode === 32) {
       // Enter
       const currentPage = $(`.page${tab}`);
       if (tab === tabs.length - 1) {
