@@ -237,7 +237,7 @@ window.onkeydown = (evt) => {
         $('#ok-btn').css('cssText', 'background-color: #000;color: #fff;');
         $('#cancel-btn').css('cssText', 'color: #000;background-color: #fff;');
       }
-    } else if (event.keyCode === 13) {
+    } else if (event.keyCode === 13 || event.keyCode === 32) {
       // Enter
       event.preventDefault();
       if (btn) {
