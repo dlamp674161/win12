@@ -2,11 +2,15 @@ name: Code Check
 
 on:
   push:
+    branches: [ main, master ] # Change to your default branch name if different
   pull_request:
 
 concurrency:
   group: '${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
   cancel-in-progress: true
+
+permissions:
+  contents: write
 
 jobs:
   prettier:
@@ -23,6 +27,7 @@ jobs:
         run: npm install -g prettier
       - name: Run Prettier Write
         run: prettier --write .
-      - name: Check for uncommitted changes
+      - name: Commit and push if changed
+        if: github.event_name == 'push'
         run: |
           git diff --exit-code || (git config --global user.name 'github-actions[bot]' && git config --global user.email 'github-actions[bot]@users.noreply.github.com' && git commit -am "style: auto-format with prettier --write" && git push)
