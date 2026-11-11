@@ -83,6 +83,22 @@ function toggleOption(optionElement) {
     optionElement.innerText = '[Auto]';
     return 'Auto';
   }
+  if (currentValue.includes('UEFI')) {
+    optionElement.innerText = '[Legacy]';
+    return 'Legacy';
+  }
+  if (currentValue.includes('Legacy')) {
+    optionElement.innerText = '[UEFI]';
+    return 'UEFI';
+  }
+  if (currentValue.includes('Not Set')) {
+    optionElement.innerText = '[Set: 12345678]';
+    return 'Set: 12345678';
+  }
+  if (currentValue.includes('Set: 12345678')) {
+    optionElement.innerText = '[Not Set]'
+    return 'Not Set';
+  }
   return currentValue;
 }
 
