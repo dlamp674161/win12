@@ -10,12 +10,19 @@ concurrency:
 
 jobs:
   prettier:
-    name: Prettier Check
+    name: Prettier Format & Check
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Setup Prettier
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+      - name: Install Prettier
         run: npm install -g prettier
-      - name: Run Prettier
-        run: prettier -c .
+      - name: Run Prettier Write
+        run: prettier --write .
+      - name: Check for uncommitted changes
+        run: |
+          git diff --exit-code || (git config --global user.name 'github-actions[bot]' && git config --global user.email 'github-actions[bot]@users.noreply.github.com' && git commit -am "style: auto-format with prettier --write" && git push)
